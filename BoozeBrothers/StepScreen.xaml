@@ -1,26 +1,27 @@
-﻿<Page x:Class="BoozeBrothers.DrinkPopup"
+﻿<Page x:Class="BoozeBrothers.StepScreen"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:k="http://schemas.microsoft.com/kinect/2013"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="400"
-	Title="DrinkPopup">
+      d:DesignHeight="1080" d:DesignWidth="1920"
+	Title="StepScreen">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0" x:Name="Title" />
-        <TextBlock Grid.Row="1" x:Name="Ingredients" />
-        <TextBlock Grid.Row="2" x:Name="Description" />
-        <TextBlock Grid.Row="3" x:Name="Rating" />
-        <k:KinectTileButton Grid.Row="3" HorizontalAlignment="Right" Width="100" Height="100" 
-                                k:KinectTileButton.Click="goToSteps" Label="Next"  />
+        
+        <TextBlock Grid.Row="0" x:Name="stepTitle" />
+        <TextBlock Grid.Row="1" x:Name="stepsIngred" />
+        <TextBlock Grid.Row="1" x:Name="stepsDesc" />
+        <!-- <TextBlock Grid.Row="1" The picture will probably go here? -->
+        <k:KinectTileButton x:Name="nextStep" k:KinectTileButton.Click="goToNextStep" Grid.Row="2">
+            Next Step!
+        </k:KinectTileButton>
+        
     </Grid>
 </Page>

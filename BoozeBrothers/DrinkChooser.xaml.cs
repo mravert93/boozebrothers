@@ -24,6 +24,8 @@ namespace BoozeBrothers
     /// </summary>
     public partial class DrinkChooser : Page
     {
+        private Drink _drink;
+
         public DrinkChooser()
         {
             InitializeComponent();
@@ -37,12 +39,20 @@ namespace BoozeBrothers
             {
                 case "drink0":
                     DrinkPopup info = new DrinkPopup(Drink.longIsland);
+                    this._drink = Drink.longIsland;
                     _popupFrame.Navigate(info);
                     _popupFrame.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
             }
+        }
+
+        //Take the user to the steps section
+        public void goToSteps(object sender, RoutedEventArgs e)
+        {
+            StepScreen firstStep = new StepScreen(this._drink, 0);
+            this.NavigationService.Navigate(firstStep);
         }
     }
 }

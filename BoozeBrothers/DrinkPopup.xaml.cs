@@ -28,26 +28,26 @@ namespace BoozeBrothers
             _drink = drink;
 
             //Set Dependencies
-            Title.SetBinding(TextBox.TextProperty, new Binding("titleProperty")
+            Title.SetBinding(TextBlock.TextProperty, new Binding("titleProperty")
             {
                 Source = _drink,
                 Mode = BindingMode.TwoWay
             });
 
-            Ingredients.SetBinding(TextBox.TextProperty, new Binding("ingredProperty")
+            Ingredients.SetBinding(TextBlock.TextProperty, new Binding("ingredProperty")
             {
                 Source = _drink,
                 Mode = BindingMode.TwoWay,
                 Converter = new ListToStringConverter()
             });
 
-            Description.SetBinding(TextBox.TextProperty, new Binding("descProperty")
+            Description.SetBinding(TextBlock.TextProperty, new Binding("descProperty")
             {
                 Source = _drink,
                 Mode = BindingMode.TwoWay
             });
 
-            Rating.SetBinding(TextBox.TextProperty, new Binding("ratingProperty")
+            Rating.SetBinding(TextBlock.TextProperty, new Binding("ratingProperty")
             {
                 Source = _drink,
                 Mode = BindingMode.TwoWay
@@ -58,7 +58,8 @@ namespace BoozeBrothers
         //Take the user to the steps section
         public void goToSteps(object sender, RoutedEventArgs e)
         {
-
+            StepScreen firstStep = new StepScreen(this._drink, 0);
+            this.NavigationService.Navigate(firstStep);
         }
     }
 }
