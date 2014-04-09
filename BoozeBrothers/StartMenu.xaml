@@ -1,0 +1,18 @@
+﻿<Page x:Class="BoozeBrothers.StartMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:k="http://schemas.microsoft.com/kinect/2013"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+	Title="StartMenu">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Name="Icon">#BoozeBrothers</TextBlock>
+
+        <k:KinectCircleButton k:KinectCircleButton.Click="goToChooseDrink" Name="StartButton" >
+            Start!
+        </k:KinectCircleButton>
+    </Grid>
+</Page>

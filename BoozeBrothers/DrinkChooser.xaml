@@ -1,0 +1,36 @@
+﻿<Page x:Class="BoozeBrothers.DrinkChooser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:k="http://schemas.microsoft.com/kinect/2013"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+	Title="DrinkChooser">
+    
+    <!--<Style x:Key="HoverHand" TargetType="" >
+        <Style.Triggers>
+            <Trigger Property="MouseEnter" Value="True" >
+                <Setter Property="Background" Value="LightGreen" />
+            </Trigger>
+        </Style.Triggers>
+    </Style> -->
+    
+    <Grid k:KinectTileButton.Click="viewInfo">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <k:KinectTileButton Grid.Row="0" x:Name="drink0" Label="Long Island Iced Tea" />
+        <k:KinectTileButton Grid.Row="0" x:Name="drink1" HorizontalAlignment="Right" Label="Margarita" />
+        <k:KinectTileButton Grid.Row="0" x:Name="drink2" HorizontalAlignment="Left" Label="Hurricane" />
+
+        <Frame Width="400" Height="400" Background="LightGray" Visibility="Hidden" x:Name="_popupFrame" />
+
+        <k:KinectTileButton Grid.Row="1" x:Name="drink3" Label="Adios" />
+        <k:KinectTileButton Grid.Row="1" x:Name="drink4" Label="Pina Colada" HorizontalAlignment="Left" />
+        <k:KinectTileButton Grid.Row="1" Label="Add A Drink" HorizontalAlignment="Right" />
+        
+    </Grid>
+</Page>
