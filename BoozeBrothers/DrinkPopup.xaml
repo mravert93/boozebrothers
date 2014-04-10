@@ -20,7 +20,5 @@
         <TextBlock Grid.Row="1" x:Name="Ingredients" />
         <TextBlock Grid.Row="2" x:Name="Description" />
         <TextBlock Grid.Row="3" x:Name="Rating" />
-        <k:KinectTileButton Grid.Row="3" HorizontalAlignment="Right" Width="100" Height="100" 
-                                k:KinectTileButton.Click="goToSteps" Label="Next"  />
     </Grid>
 </Page>
