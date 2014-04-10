@@ -38,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft SDKs\Kinect\v1.8\Assemblies\Microsoft.Kinect.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Speech, Version=11.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Speech\v11.0\Assembly\Microsoft.Speech.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -57,6 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Congrats.xaml.cs">
+      <DependentUpon>Congrats.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Drink.cs" />
     <Compile Include="DrinkChooser.xaml.cs">
       <DependentUpon>DrinkChooser.xaml</DependentUpon>
@@ -72,6 +79,10 @@
     <Compile Include="StepScreen.xaml.cs">
       <DependentUpon>StepScreen.xaml</DependentUpon>
     </Compile>
+    <Page Include="Congrats.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DrinkChooser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

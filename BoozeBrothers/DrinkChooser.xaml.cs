@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using Microsoft.Kinect.Toolkit.Controls;
 using Microsoft.Kinect.Toolkit;
 using Microsoft.Kinect;
+using Microsoft.Speech.AudioFormat;
+using Microsoft.Speech.Recognition;
 
 namespace BoozeBrothers
 {
@@ -25,6 +27,7 @@ namespace BoozeBrothers
     public partial class DrinkChooser : Page
     {
         private Drink _drink;
+        private SpeechRecognitionEngine speechEngine;
 
         public DrinkChooser()
         {
@@ -34,17 +37,26 @@ namespace BoozeBrothers
         //Display the drink's information to the user
         public void viewInfo(object sender, RoutedEventArgs e)
         {
-            var button = (KinectTileButton) e.OriginalSource;
-            switch (button.Name)
+            if (e.OriginalSource is KinectCircleButton)
             {
-                case "drink0":
-                    DrinkPopup info = new DrinkPopup(Drink.longIsland);
-                    this._drink = Drink.longIsland;
-                    _popupFrame.Navigate(info);
-                    _popupFrame.Visibility = Visibility.Visible;
-                    break;
-                default:
-                    break;
+                goToSteps(sender, e);
+            }
+            else
+            {
+
+                var button = (KinectTileButton)e.OriginalSource;
+                switch (button.Name)
+                {
+                    case "drink0":
+                        DrinkPopup info = new DrinkPopup(Drink.longIsland);
+                        this._drink = Drink.longIsland;
+                        this._stepsButton.Visibility = Visibility.Visible;
+                        _popupFrame.Navigate(info);
+                        _popupFrame.Visibility = Visibility.Visible;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -54,5 +66,76 @@ namespace BoozeBrothers
             StepScreen firstStep = new StepScreen(this._drink, 0);
             this.NavigationService.Navigate(firstStep);
         }
+
+        #region Speech Recognition
+
+        //get the metadata for the speech recognizer
+        private static RecognizerInfo GetKinectRecognizer()
+        {
+            foreach (RecognizerInfo recognizer in SpeechRecognitionEngine.InstalledRecognizers())
+            {
+                string value;
+                recognizer.AdditionalInfo.TryGetValue("Kinect", out value);
+                if ("True".Equals(value, StringComparison.OrdinalIgnoreCase) && "en-US".Equals(recognizer.Culture.Name,
+                    StringComparison.OrdinalIgnoreCase))
+                {
+                    return recognizer;
+                }
+            }
+
+            return null;
+        }
+
+        //When the window loads up, load up the speech recognizer
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            RecognizerInfo ri = GetKinectRecognizer();
+
+            if (ri != null)
+            {
+                this.speechEngine = new SpeechRecognitionEngine(ri.Id);
+
+                //Creating the grammar for the speech to recognize
+                var help = new Choices();
+                help.Add(new SemanticResultValue("help", "HELP"));
+                help.Add(new SemanticResultValue("clear", "CLEAR"));
+
+                var gb = new GrammarBuilder { Culture = ri.Culture };
+                gb.Append(help);
+
+                var g = new Grammar(gb);
+
+                speechEngine.SpeechRecognized += speechEngine_SpeechRecognized;
+                speechEngine.SpeechRecognitionRejected += speechEngine_SpeechRecognitionRejected;
+            }
+        }
+
+        void speechEngine_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void speechEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            //Speech utter confidence in which speech is treated as if its heard or not
+            const double ConfidenceThreshold = 0.3;
+
+             if (e.Result.Confidence >= ConfidenceThreshold)
+            {
+                switch (e.Result.Semantics.Value.ToString())
+                {
+                    case "HELP":
+                        this.Test.Visibility = Visibility.Visible;
+                        break;
+                    case "CLEAR":
+                        this.Test.Visibility = Visibility.Hidden;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        #endregion
     }
 }

@@ -29,40 +29,49 @@ namespace BoozeBrothers
             InitializeComponent();
 
             List<Step> steps = drink.stepsProperty;
-            if (currentStep >= steps.Count)
-            {
-                //Goto Congrats
-            }
+                _curStep = steps.ElementAt(currentStep);
+                _drink = drink;
+                _curIndex = currentStep;
 
-            _curStep = steps.ElementAt(currentStep);
-            _drink = drink;
-            _curIndex = currentStep;
+                stepTitle.SetBinding(TextBlock.TextProperty, new Binding("titleProperty")
+                {
+                    Source = _curStep,
+                    Mode = BindingMode.TwoWay
+                });
 
-            stepTitle.SetBinding(TextBlock.TextProperty, new Binding("titleProperty")
-            {
-                Source = _curStep,
-                Mode = BindingMode.TwoWay
-            });
+                stepsIngred.SetBinding(TextBlock.TextProperty, new Binding("ingredProperty")
+                {
+                    Source = _curStep,
+                    Mode = BindingMode.TwoWay
+                });
 
-            stepsIngred.SetBinding(TextBlock.TextProperty, new Binding("ingredProperty")
-            {
-                Source = _curStep,
-                Mode = BindingMode.TwoWay
-            });
-
-            stepsDesc.SetBinding(TextBlock.TextProperty, new Binding("descProperty")
-            {
-                Source = _curStep,
-                Mode = BindingMode.TwoWay
-            });
+                stepsDesc.SetBinding(TextBlock.TextProperty, new Binding("descProperty")
+                {
+                    Source = _curStep,
+                    Mode = BindingMode.TwoWay
+                });
         }
 
         //Takes the user to the next step or completion page if there are no more steps
         public void goToNextStep(object sender, RoutedEventArgs e)
         {
             _curIndex++;
-            StepScreen nextStep = new StepScreen(this._drink, _curIndex);
-            this.NavigationService.Navigate(nextStep);
+            if (_curIndex >= this._drink.stepsProperty.Count)
+            {
+                goToCongrats(this._drink);
+            }
+            else
+            {
+                StepScreen nextStep = new StepScreen(this._drink, _curIndex);
+                this.NavigationService.Navigate(nextStep);
+            }
+        }
+
+        //Takes the user to the congrats screen
+        public void goToCongrats(Drink drink)
+        {
+            Congrats congratsScreen = new Congrats(drink);
+            this.NavigationService.Navigate(congratsScreen);
         }
     }
 }

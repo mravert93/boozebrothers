@@ -26,3 +26,5 @@ c:\users\mike\documents\visual studio 2012\Projects\BoozeBrothers\BoozeBrothers\
 c:\users\mike\documents\visual studio 2012\Projects\BoozeBrothers\BoozeBrothers\obj\Debug\DrinkPopup.g.cs
 c:\users\mike\documents\visual studio 2012\Projects\BoozeBrothers\BoozeBrothers\obj\Debug\StepScreen.baml
 c:\users\mike\documents\visual studio 2012\Projects\BoozeBrothers\BoozeBrothers\obj\Debug\StepScreen.g.cs
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\BoozeBrothers\BoozeBrothers\obj\Debug\Congrats.baml
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\BoozeBrothers\BoozeBrothers\obj\Debug\Congrats.g.cs

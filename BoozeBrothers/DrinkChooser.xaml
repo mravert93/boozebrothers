@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:k="http://schemas.microsoft.com/kinect/2013"
       mc:Ignorable="d" 
-      d:DesignHeight="1080" d:DesignWidth="1920"
+      d:DesignHeight="1080" d:DesignWidth="1920" Loaded="WindowLoaded"
 	Title="DrinkChooser">
     
     <!--<Style x:Key="HoverHand" TargetType="" >
@@ -27,10 +27,13 @@
         <k:KinectTileButton Grid.Row="0" x:Name="drink2" HorizontalAlignment="Left" Label="Hurricane" />
 
         <Frame Width="400" Height="400" Background="LightGray" Visibility="Hidden" x:Name="_popupFrame" />
+        <k:KinectCircleButton x:Name="_stepsButton" Visibility="Hidden" HorizontalAlignment="Right"
+                              Margin="0,160,304,124" k:KinectCircleButton.Click="goToSteps" RenderTransformOrigin="1.17,0.484" >Start</k:KinectCircleButton>
 
         <k:KinectTileButton Grid.Row="1" x:Name="drink3" Label="Adios" />
         <k:KinectTileButton Grid.Row="1" x:Name="drink4" Label="Pina Colada" HorizontalAlignment="Left" />
         <k:KinectTileButton Grid.Row="1" Label="Add A Drink" HorizontalAlignment="Right" />
+        <TextBlock x:Name="Test" Visibility="Hidden" >Testing voice thing out</TextBlock>
         
     </Grid>
 </Page>
